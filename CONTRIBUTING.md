@@ -83,10 +83,10 @@ Breaking changes add a line `🚨 BREAKING CHANGE: <what breaks>` in the commit 
 - Run the formatter/linter before committing. CI runs the same checks.
 - Follow the existing file structure and patterns.
 - Python: snake_case modules and functions, type hints and a docstring on every public function. `ruff format` for formatting.
-- A new rule goes in `backend/app/rules.py` with at least one case that must fire and one that must not in `tests/test_rules.py`. Match on the `code` view unless the rule is about strings or comments, so text inside strings doesn't trigger it.
-- Rule fixes must stay on their own line (line numbers can't move) and be safe to apply without understanding the program; anything bigger is the model's job.
-- Prompt changes in `backend/app/review.py`: run the samples against a real model before and after, and note what changed in the PR. The fake model in the tests can't tell you whether a prompt got better.
-- Backend tests use a fake streaming chat model, so they need no API key; keep it that way.
+- A new job board goes in `backend/app/sources/boards.py`, with a trimmed real response saved under `backend/tests/fixtures/` and a parser test against it. A new hiring-signal rule goes in `backend/app/signals.py` with a test that it fires and one that it doesn't.
+- Requests to outside sites go through `Fetcher` in `backend/app/http.py`, so they keep the per-host spacing and retries. A URL a user typed goes through `check_public_url` first.
+- Prompt changes in `backend/app/classify.py`: classify a real batch of headlines before and after and note the label counts in the PR. The fake model in the tests can't tell you whether a prompt got better.
+- Tests use fixtures and a fake chat model, so they need no network or API key; keep it that way.
 
 ---
 

@@ -57,7 +57,8 @@ You'll be kept updated throughout, and credited in the release notes once it's f
 - Vulnerabilities in third-party services (e.g. hosting providers, Groq). Report those to the vendor.
 - Denial-of-service, spam or volumetric attacks
 - A suggested fix that is wrong or insecure: suggestions are for a human to review, never applied automatically
-- Prompt injection that only changes the wording of a review- A headline classified with the wrong sentiment: it's a judgement, shown with its source, and changes nothing by itself
+- Prompt injection that only changes a headline's label or explanation
+- A headline classified with the wrong sentiment: it's a judgement, shown with its source, and changes nothing by itself
 - Rate limits or terms of the job boards, Google News or Hacker News
 - Social engineering
 - Findings from automated scanners with no demonstrated impact
