@@ -1,0 +1,93 @@
+{
+ "apiVersion": "1",
+ "jobs": [
+  {
+   "id": "240d459b-696d-43eb-8497-fab3e56ecd9b",
+   "title": "Research Engineer",
+   "department": "Research",
+   "team": "Research",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/240d459b-696d-43eb-8497-fab3e56ecd9b",
+   "publishedAt": "2025-04-05T00:03:20.653+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "2560ed50-5535-42b8-b069-9ebc28ce7493",
+   "title": "Researcher, Safety Training",
+   "department": "Safety Systems",
+   "team": "Safety Systems",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/2560ed50-5535-42b8-b069-9ebc28ce7493",
+   "publishedAt": "2023-05-25T04:06:29.356+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "3c67f712-697d-48d8-b05c-01be896e61da",
+   "title": "Software Engineer, Scaled Abuse",
+   "department": "Applied AI",
+   "team": "Applied AI Engineering",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/3c67f712-697d-48d8-b05c-01be896e61da",
+   "publishedAt": "2026-06-08T16:15:58.343+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "f763c6b3-5167-4a67-b691-4c3fa2c44156",
+   "title": "Software Engineer, Data Infrastructure",
+   "department": "Scaling",
+   "team": "Scaling",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/f763c6b3-5167-4a67-b691-4c3fa2c44156",
+   "publishedAt": "2024-06-27T22:14:24.195+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "d8794980-1d3f-4d82-8b48-811449b6c492",
+   "title": "Training: ML Framework Engineer",
+   "department": "Scaling",
+   "team": "Runtime",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/d8794980-1d3f-4d82-8b48-811449b6c492",
+   "publishedAt": "2025-10-29T02:18:26.437+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "2cba0d45-7a4f-4f38-ac73-3f8633bf0349",
+   "title": "Software Engineer, Developer Productivity",
+   "department": "Applied AI",
+   "team": "Applied AI Infrastructure",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/2cba0d45-7a4f-4f38-ac73-3f8633bf0349",
+   "publishedAt": "2025-03-27T16:44:10.676+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "fc5bbc77-a30c-4e7a-9acc-8a2e748545b4",
+   "title": "Data Engineer",
+   "department": "Applied AI",
+   "team": "Applied AI Engineering",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/fc5bbc77-a30c-4e7a-9acc-8a2e748545b4",
+   "publishedAt": "2023-09-26T22:34:48.884+00:00",
+   "isListed": true,
+   "employmentType": "FullTime"
+  },
+  {
+   "id": "5f0c6579-0bfb-4a06-8a43-1dd371499e10",
+   "title": "Research Scientist",
+   "department": "Research",
+   "team": "Research",
+   "location": "San Francisco",
+   "jobUrl": "https://jobs.ashbyhq.com/openai/5f0c6579-0bfb-4a06-8a43-1dd371499e10",
+   "publishedAt": "2025-04-05T00:03:14.982+00:00",
+   "isListed": false,
+   "employmentType": "FullTime"
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "hits": [
+  {
+   "objectID": "50294551",
+   "title": "/dev/finance, Stripe founding documents, and USCIS O-1 evidence",
+   "url": "https://raeez.com/devfinance.html",
+   "created_at": "2026-10-29T19:31:54Z",
+   "points": 2,
+   "num_comments": 0,
+   "author": "bschne"
+  },
+  {
+   "objectID": "50284675",
+   "title": "Stripe Introduces B2B CLI Payments",
+   "url": "https://docs.stripe.com/cli/pay",
+   "created_at": "2026-10-29T04:46:59Z",
+   "points": 2,
+   "num_comments": 1,
+   "author": "meander_water"
+  },
+  {
+   "objectID": "50280650",
+   "title": "Show HN: I built a tool that finds reliability bugs in your code",
+   "created_at": "2026-10-28T20:45:51Z",
+   "points": 6,
+   "num_comments": 0,
+   "author": "aray07"
+  },
+  {
+   "objectID": "50277906",
+   "title": "Stripe Pay: B2B CLI Payments",
+   "url": "https://twitter.com/stripe/status/2115122346075832468",
+   "created_at": "2026-10-28T17:51:11Z",
+   "points": 1,
+   "num_comments": 0,
+   "author": "helloguillecl"
+  },
+  {
+   "objectID": "50277662",
+   "title": "Show HN: OpenTaxRate \u2013 open-source US sales tax rates by street address",
+   "url": "https://github.com/equated-org/opentaxrate",
+   "created_at": "2026-10-28T17:40:49Z",
+   "points": 5,
+   "num_comments": 1,
+   "author": "winxton"
+  }
+ ],
+ "nbHits": 5
+}

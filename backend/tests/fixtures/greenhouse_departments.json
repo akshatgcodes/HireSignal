@@ -1,0 +1,125 @@
+{
+ "departments": [
+  {
+   "id": 79915,
+   "name": "1120 Training & Certification",
+   "parent_id": 81965,
+   "child_ids": [],
+   "jobs": [
+    {
+     "id": 8164666,
+     "title": "Technical Curriculum Developer, Technical Enablement",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=8164666",
+     "location": {
+      "name": "San Francisco; Seattle; Remote"
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2026-10-28T18:31:30-04:00"
+    }
+   ]
+  },
+  {
+   "id": 78923,
+   "name": "1130 Global Sales Development Mgrs",
+   "parent_id": 150327,
+   "child_ids": [],
+   "jobs": [
+    {
+     "id": 7337544,
+     "title": "Manager, Sales Development",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=7337544",
+     "location": {
+      "name": "Dublin "
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2025-10-28T04:53:42-04:00"
+    },
+    {
+     "id": 7896538,
+     "title": "Manager, Sales Development",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=7896538",
+     "location": {
+      "name": "Chicago, Illinois"
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2026-05-11T11:19:11-04:00"
+    },
+    {
+     "id": 8198330,
+     "title": "Senior Manager, Sales Development",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=8198330",
+     "location": {
+      "name": "Chicago"
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2026-10-02T22:25:02-04:00"
+    }
+   ]
+  },
+  {
+   "id": 241705,
+   "name": "1132 AMER Sales Development Reps",
+   "parent_id": 150327,
+   "child_ids": [],
+   "jobs": [
+    {
+     "id": 6570253,
+     "title": "Sales Development Representative",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=6570253",
+     "location": {
+      "name": "Chicago, Illinois"
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2025-02-03T21:54:10-05:00"
+    },
+    {
+     "id": 8248086,
+     "title": "Sales Development Representative (Spanish fluency)",
+     "absolute_url": "https://stripe.com/jobs/search?gh_jid=8248086",
+     "location": {
+      "name": "Chicago, IL"
+     },
+     "updated_at": "2026-10-29T10:42:09-04:00",
+     "first_published": "2026-10-07T17:45:35-04:00"
+    }
+   ]
+  },
+  {
+   "id": 81965,
+   "name": "Revenue Operations (Planning Group)",
+   "parent_id": 185848,
+   "child_ids": [
+    79915,
+    263174,
+    61573,
+    81433,
+    81434,
+    78927,
+    354666,
+    380785,
+    80655
+   ],
+   "jobs": []
+  },
+  {
+   "id": 150327,
+   "name": "Sales Development Reps (Planning Group)",
+   "parent_id": 150326,
+   "child_ids": [
+    78923,
+    241705,
+    251118,
+    241706,
+    337843
+   ],
+   "jobs": []
+  },
+  {
+   "id": 0,
+   "name": "No Department",
+   "parent_id": null,
+   "child_ids": [],
+   "jobs": []
+  }
+ ]
+}
