@@ -97,7 +97,8 @@ class Signal(Base):
     sentiment: Mapped[str] = mapped_column(String(10))
     title: Mapped[str] = mapped_column(String(500))
     explanation: Mapped[str] = mapped_column(Text, default="")
-    url: Mapped[str] = mapped_column(String(1000), default="")
+    # Google News article links run past 1,000 characters
+    url: Mapped[str] = mapped_column(Text, default="")
     publisher: Mapped[str] = mapped_column(String(200), default="")
     # Dedup key: the feed's guid / HN id / a hash for hiring diffs
     external_id: Mapped[str] = mapped_column(String(200))

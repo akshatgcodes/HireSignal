@@ -80,7 +80,9 @@ def scan_company(company_id: int) -> dict:
             raise
         except Exception as e:  # noqa: BLE001 — one company must not sink the chord
             log.exception("scan of company %s failed", company_id)
-            return {"company_id": company_id, "error": f"{type(e).__name__}: {e}"}
+            # SQL errors carry the whole statement; the run log needs the first line
+            first = str(e).splitlines()[0] if str(e) else ""
+            return {"company_id": company_id, "error": f"{type(e).__name__}: {first}"[:300]}
 
 
 @celery.task(name="hiresignal.finish_run")

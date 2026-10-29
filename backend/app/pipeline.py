@@ -24,6 +24,9 @@ def _add(db: Session, company: Company, existing: set[str], **fields) -> bool:
     if fields["external_id"] in existing:
         return False
     existing.add(fields["external_id"])
+    # Feeds don't promise lengths; fit what we store to the columns
+    fields["title"] = fields["title"][:500]
+    fields["publisher"] = fields.get("publisher", "")[:200]
     db.add(Signal(company_id=company.id, **fields))
     return True
 

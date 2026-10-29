@@ -136,3 +136,29 @@ def test_same_story_under_a_new_id_is_skipped(db, stripe, web):
     web.routes[("news.google.com", "/rss/search")] = [(200, xml, {})]
     stats = pipeline.scan_company(db, stripe.id, web.fetcher())
     assert stats["news_new"] == 0
+
+
+def test_long_urls_and_titles_fit(db, stripe, web):
+    long_url = "https://news.google.com/rss/articles/" + "A" * 1500
+    title = "Stripe " + "x" * 700
+    xml = (
+        "<rss><channel><item><title>" + title + "</title><link>" + long_url + "</link>"
+        "<guid>g1</guid><pubDate>Wed, 28 Oct 2026 02:04:32 GMT</pubDate>"
+        '<source url="https://p">' + "P" * 300 + "</source></item></channel></rss>"
+    )
+    web.routes[("news.google.com", "/rss/search")] = [(200, xml, {})]
+    stats = pipeline.scan_company(db, stripe.id, web.fetcher())
+    assert stats["error"] == ""
+    s = db.scalars(select(Signal).where(Signal.external_id == "gn:g1")).one()
+    assert s.url == long_url and len(s.title) == 500 and len(s.publisher) == 200
+
+
+def test_task_error_is_one_short_line(db, stripe, monkeypatch):
+    from app import tasks
+
+    def boom(*a, **k):
+        raise RuntimeError("value too long\n[SQL: INSERT ...]\n" + "p" * 5000)
+
+    monkeypatch.setattr("app.tasks.pipeline.scan_company", boom)
+    out = tasks.scan_company.run(stripe.id)
+    assert out["error"] == "RuntimeError: value too long"
