@@ -1,0 +1,84 @@
+# docker compose up --build  →  app http://localhost:5173 · mail http://localhost:8025
+# LLM_API_KEY (or GROQ_API_KEY) from your shell turns on LLM classification; without it,
+# headlines are classified by keywords.
+x-backend-env: &backend-env
+  DATABASE_URL: postgresql+psycopg://hiresignal:hiresignal@db:5432/hiresignal
+  REDIS_URL: redis://redis:6379/0
+  APP_PASSWORD: ${APP_PASSWORD:-hiresignal}
+  SESSION_SECRET: ${SESSION_SECRET:-dev-only-change-me}
+  FRONTEND_URL: http://localhost:5173
+  PUBLIC_URL: http://localhost:5173
+  TIMEZONE: ${TIMEZONE:-Asia/Kolkata}
+  SCAN_HOUR: ${SCAN_HOUR:-2}
+  DIGEST_HOUR: ${DIGEST_HOUR:-8}
+  DIGEST_TO: ${DIGEST_TO:-me@hiresignal.local}
+  LLM_API_KEY: ${LLM_API_KEY:-}
+  GROQ_API_KEY: ${GROQ_API_KEY:-}
+  SMTP_HOST: ${SMTP_HOST:-mailpit}
+  SMTP_PORT: ${SMTP_PORT:-1025}
+  SMTP_USER: ${SMTP_USER:-}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+  SMTP_STARTTLS: ${SMTP_STARTTLS:-false}
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: hiresignal
+      POSTGRES_PASSWORD: hiresignal
+      POSTGRES_DB: hiresignal
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hiresignal"]
+      interval: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      retries: 20
+
+  # Catches outgoing mail locally; nothing leaves your machine
+  mailpit:
+    image: axllent/mailpit:v1.21
+    ports:
+      - "8025:8025"
+
+  api:
+    build: ./backend
+    environment: *backend-env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Runs the scans: one task per company, several at a time
+  worker:
+    build: ./backend
+    command: celery -A app.tasks worker --concurrency 4 --loglevel INFO
+    environment: *backend-env
+    depends_on:
+      api:
+        condition: service_started
+
+  # Puts the nightly scan and the morning digest on the queue
+  beat:
+    build: ./backend
+    command: celery -A app.tasks beat --loglevel INFO --schedule /tmp/celerybeat-schedule
+    environment: *backend-env
+    depends_on:
+      - redis
+
+  web:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
