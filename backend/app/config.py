@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     scan_hour: int = 2
     digest_hour: int = 8
     digest_to: str = ""  # empty → digest is built and saved, but not emailed
+    # Hosts without a Celery worker: an outside scheduler POSTs /api/cron/* with this secret
+    cron_secret: str = ""
 
     # Outgoing HTTP. Identify ourselves and stay well under any rate limit
     user_agent: str = "HireSignal/0.1 (personal job tracker)"

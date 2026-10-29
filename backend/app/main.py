@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import auth
 from app.config import settings
 from app.db import Base, engine
-from app.routers import applications, companies, dashboard, runs, signals
+from app.routers import applications, companies, cron, dashboard, runs, signals
 
 logging.basicConfig(level=logging.INFO)
 
@@ -33,6 +33,7 @@ app.include_router(applications.router)
 app.include_router(signals.router)
 app.include_router(runs.router)
 app.include_router(dashboard.router)
+app.include_router(cron.router)
 
 
 @app.get("/health")

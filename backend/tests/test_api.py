@@ -270,3 +270,20 @@ def test_company_detail_and_delete(user, web):
     assert user.get("/api/applications").json() == []
     assert user.get("/api/signals").json() == []
     assert user.get(f"/api/companies/{c['id']}").status_code == 404
+
+
+def test_cron_routes_are_off_without_a_secret(client):
+    assert client.post("/api/cron/scan").status_code == 404
+
+
+def test_cron_routes(client, web, monkeypatch):
+    monkeypatch.setattr("app.routers.cron.settings.cron_secret", "s3cret")
+    assert client.post("/api/cron/scan").status_code == 401
+    assert client.post("/api/cron/scan", headers={"X-Cron-Secret": "nope"}).status_code == 401
+    r = client.post("/api/cron/scan", headers={"X-Cron-Secret": "s3cret"})
+    assert r.status_code == 202
+    assert client.post("/api/cron/digest", headers={"X-Cron-Secret": "s3cret"}).json() == {
+        "digest_id": None
+    }
+    client.post("/api/auth/login", json={"password": "test-pass"})
+    assert client.get(f"/api/runs/{r.json()['run_id']}").json()["trigger"] == "schedule"
