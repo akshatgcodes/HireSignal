@@ -3,9 +3,10 @@ import os
 import tempfile
 from pathlib import Path
 
-# Settings are read at import time, so point them at a throwaway DB before importing the app
+# Settings are read at import time, so point them at a throwaway DB before importing the app.
+# TEST_DATABASE_URL runs the suite on Postgres instead (CI does), which enforces column sizes
 _db = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
-os.environ["DATABASE_URL"] = f"sqlite:///{_db.name}"
+os.environ["DATABASE_URL"] = os.environ.get("TEST_DATABASE_URL") or f"sqlite:///{_db.name}"
 os.environ["APP_PASSWORD"] = "test-pass"
 os.environ["REDIS_URL"] = ""
 os.environ["CELERY_ALWAYS_EAGER"] = "true"
