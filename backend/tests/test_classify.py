@@ -80,6 +80,12 @@ def test_llm_bad_values_are_coerced():
     assert (v.sentiment, v.kind, v.relevant) == ("neutral", "other", True)
 
 
+def test_llm_null_explanation_is_empty():
+    reply = '{"items": [{"i": 1, "relevant": false, "explanation": null}]}'
+    [v], _ = classify.classify("Acme", [], [art("Acme")], model=FakeChat(reply))
+    assert v.explanation == ""
+
+
 def test_llm_missing_items_fall_back_per_headline():
     reply = json.dumps(
         {

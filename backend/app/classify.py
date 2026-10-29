@@ -31,16 +31,19 @@ KINDS = (
 SYSTEM = """You help a job seeker read the news about companies they applied to.
 
 For each numbered headline, decide:
-- relevant: is it actually about the company named? Namesakes, sports, obituaries and
-  stories about former employees' new ventures are not relevant.
+- relevant: is it actually about the company named? Not relevant: namesakes, sports,
+  obituaries, former employees' new ventures, and market-research press releases that
+  list many companies ("X Market Is Going to Boom | A • B • C").
 - sentiment, from the point of view of someone with an open application there. Most news
   is neutral; pick bullish or bearish only when the headline points to a change in how
   much the company is hiring or the money behind it.
   bullish: funding, a hiring push, new offices, strong results, fast expansion.
   bearish: layoffs, hiring freezes, big losses, cost cutting, a crisis that threatens the
   business, leaders leaving in a hurry.
-  neutral: product launches, partnerships, routine acquisitions, analyst ratings and
-  stock moves, opinion pieces, incidents and bugs, community posts.
+  neutral: product launches, partnerships, routine acquisitions, opinion pieces,
+  incidents and bugs, community posts. Share-price moves, analyst ratings, price targets
+  and stock predictions are neutral too, however excited the wording: they say nothing
+  about hiring.
 - kind: one of funding, layoffs, hiring, leadership, earnings, acquisition, product,
   partnership, legal, other.
 - explanation: one short sentence on what this means for the application (not a restatement
@@ -169,7 +172,7 @@ def _parse(raw: str, n: int) -> dict[int, Verdict]:
                 if sentiment in ("bullish", "bearish", "neutral")
                 else "neutral",
                 kind=kind if kind in KINDS else "other",
-                explanation=str(item.get("explanation", "")).strip()[:600],
+                explanation=str(item.get("explanation") or "").strip()[:600],
                 by="llm",
             )
     return out
