@@ -1,8 +1,24 @@
 # Deploy
 
-HireSignal is **not deployed yet**. These are the two intended setups.
+## Live demo
 
-## One server (the full design)
+Live at **https://hiresignal.akshatgcodes.in**: one free Render web service (Python runtime, Singapore), connected to this repo, so every push to `main` deploys. The free instance sleeps after 15 minutes idle and takes up to a minute to wake.
+
+The API serves the whole site when `SITE_DIR` is set (`backend/app/site.py`): the landing page (`landing/`, a Next.js static export) at `/`, the React app at `/app/`, and the API at `/api`.
+
+| Setting | Value |
+|---|---|
+| Build | `pip install uv && cd backend && uv sync --frozen --no-dev && cd ../landing && npm ci && npm run build && cd ../frontend && npm ci && VITE_BASE=/app/ npm run build` |
+| Start | `cd backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| Health check | `/health` |
+
+Database: Neon Postgres. There's no worker or beat on the free tier, so `CELERY_ALWAYS_EAGER=true` runs a scan inside the request, and `.github/workflows/scheduled-scan.yml` calls the cron routes at 02:00 IST (scan) and 08:00 IST (digest), waking the instance first.
+
+Environment: `DATABASE_URL`, `SESSION_SECRET`, `APP_PASSWORD` (`demo1234` on the demo), `CELERY_ALWAYS_EAGER=true`, `CRON_SECRET`, `LLM_API_KEY`, `SITE_DIR=/opt/render/project/src`, `FRONTEND_URL`, `PUBLIC_URL`, `PYTHON_VERSION`. No `REDIS_URL` and no SMTP: digests show in the app. On GitHub: the `CRON_SECRET` secret and the `HIRESIGNAL_URL` variable.
+
+## Other ways to host it
+
+### One server (the full design)
 
 `docker compose up -d --build` on a small VM, with TLS in front of the `web` service. In an `.env` next to the Compose file:
 
@@ -11,7 +27,7 @@ HireSignal is **not deployed yet**. These are the two intended setups.
 - `DIGEST_TO` and real `SMTP_*` settings; then remove the `mailpit` service, or at least stop publishing port 8025
 - `PUBLIC_URL` set to the public address
 
-## Free tiers (no worker)
+### Free tiers (no worker)
 
 Free web-service tiers usually can't run a separate worker and beat. The API can run tasks itself:
 

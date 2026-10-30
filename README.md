@@ -13,6 +13,9 @@
 </p>
 
 <p align="center">
+  <a href="https://hiresignal.akshatgcodes.in">
+    <img src="https://img.shields.io/badge/live_demo-0f766e-0f766e?style=flat-square" alt="Live Demo">
+  </a>
   <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
@@ -34,6 +37,9 @@ A Kanban board for your applications (Applied → Interview → Offer → Reject
 3. **The morning email.** New signals grouped by company, each with a one-line explanation, and the follow-ups that are due.
 
 Hiring signals are plain arithmetic on the snapshots, so they don't depend on the model. Without an LLM key, headlines are classified by a keyword table instead.
+
+> **Live demo →** [hiresignal.akshatgcodes.in](https://hiresignal.akshatgcodes.in)
+> Log in with the demo password `demo1234`. It scans every night from a GitHub Actions schedule; digests show in the app instead of being emailed. The free host sleeps when idle, so the first load can take up to a minute.
 
 ---
 

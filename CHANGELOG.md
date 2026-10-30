@@ -6,6 +6,11 @@ All notable changes to **HireSignal** are documented here.
 
 ## [Unreleased]
 
+### ✨ Added
+- Product page at `/` and the app at `/app/`, served together from one host
+- Deployed on Render (free web service): the API serves the landing page and app when `SITE_DIR` is set, Neon Postgres
+- Scheduled scan and digest run from a GitHub Actions cron, since the free instance sleeps
+
 ---
 
 ## [0.1.0] — 2026-10-30
