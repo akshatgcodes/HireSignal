@@ -1,0 +1,47 @@
+# Nightly scan and morning digest for deploys without a Celery worker and beat
+# (the free Render setup in docs/DEPLOY.md). The API runs the scan inside the request.
+#
+# One-time setup:
+#   HIRESIGNAL_URL   repo variable, e.g. https://hiresignal.akshatgcodes.in
+#   CRON_SECRET      repo secret, the same value as the API's CRON_SECRET
+# Without HIRESIGNAL_URL the jobs skip themselves, so forks don't fail every night.
+
+name: Scheduled scan
+
+on:
+  schedule:
+    - cron: "30 20 * * *"   # 20:30 UTC = 02:00 IST: scan
+    - cron: "30 2 * * *"    # 02:30 UTC = 08:00 IST: digest
+  workflow_dispatch:
+    inputs:
+      job:
+        description: What to run
+        type: choice
+        options: [scan, digest]
+        default: scan
+
+permissions: {}
+
+jobs:
+  run:
+    if: vars.HIRESIGNAL_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      URL: ${{ vars.HIRESIGNAL_URL }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+      JOB: ${{ github.event.schedule == '30 2 * * *' && 'digest' || inputs.job || 'scan' }}
+    steps:
+      - name: Wake the API
+        # Free instances sleep when idle and take up to a minute to start
+        run: |
+          for i in $(seq 1 12); do
+            curl -sf --max-time 20 "$URL/health" && exit 0
+            sleep 10
+          done
+          echo "::error::API did not wake up"; exit 1
+
+      - name: Run ${{ env.JOB }}
+        run: |
+          curl -sS --fail-with-body --max-time 1500 -X POST \
+            -H "X-Cron-Secret: $CRON_SECRET" "$URL/api/cron/$JOB"
