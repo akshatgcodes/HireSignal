@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     app_password: str = ""
     session_secret: str = "dev-insecure-secret"
     frontend_url: str = "http://localhost:5173"
+    # Set on one-host deploys: serve landing/out at / and frontend/dist at /app/ (app/site.py)
+    site_dir: str = ""
     cross_site_cookies: bool = False
 
     # Nightly scan, then the morning digest (both in this timezone)
